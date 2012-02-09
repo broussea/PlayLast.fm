@@ -1,0 +1,9 @@
+[RB Plugin]
+Loader=python
+Module=playlastfm
+IAge=1
+Name=Playlast.fm
+Description=Automatic playlist generator from Last.fm scrobble
+Authors=Bertrand Rousseau <bertrand.rousseau@gmail.com>
+Copyright=Copyright © 2010 Bertrand Rousseau
+Website=http://www.fritalk.com
