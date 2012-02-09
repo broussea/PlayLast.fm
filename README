@@ -6,7 +6,7 @@ PlayLast.fm is a rhythmbox plugin to create playlist from Last.fm scrobbles.
 INSTALL
 -------
 
-place a copy of the root directory (the one containing the .plugin file and the playlastfm directory) in .local/share/rhythmbox/plugins. See the rhythmbox documentation for more information in case of trouble.
+place a copy of the root directory (the one containing the .plugin and .py files) in .local/share/rhythmbox/plugins. See the rhythmbox documentation for more information in case of trouble.
 
 REQUIREMENTS
 ------------
