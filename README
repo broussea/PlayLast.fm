@@ -1,0 +1,32 @@
+PlayLast.fm
+===========
+
+PlayLast.fm is a rhythmbox plugin to create playlist from Last.fm scrobbles.
+
+INSTALL
+-------
+
+place a copy of the root directory (the one containing the .plugin file and the playlastfm directory) in .local/share/rhythmbox/plugins. See the rhythmbox documentation for more information in case of trouble.
+
+REQUIREMENTS
+------------
+
+This plugin works with rhythmbox 2.95. It probably won't with previous version.
+
+TODO
+----
+
+ * Better UI:
+   * Fetch progress
+   * Better playlist settings UI
+ * Use last.fm API v2
+ * Additional playlist creation settings:
+   * Maximum size
+   * Sort by "play count"
+ * Elminate/resolve duplicates
+
+AUTHORS
+-------
+
+Bertrand Rousseau - <bertrand.rousseau@gmail.com>
+
