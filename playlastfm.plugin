@@ -1,8 +1,8 @@
-[RB Plugin]
+[Plugin]
 Loader=python
 Module=playlastfm
-IAge=1
-Name=Playlast.fm
+IAge=2
+Name=playlastfm
 Description=Automatic playlist generator from Last.fm scrobble
 Authors=Bertrand Rousseau <bertrand.rousseau@gmail.com>
 Copyright=Copyright © 2010 Bertrand Rousseau
