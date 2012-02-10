@@ -82,29 +82,36 @@ class PlayLastFmPlugin(GObject.Object, Peas.Activatable):
         # Retrieve songs from DB
         print "Trying to query the RhythmDB for the song list."
         self.qm = RB.RhythmDBQueryModel.new_empty(self.db)
-        query = GLib.PtrArray()
         song_len = len(songs)
         for i in range(song_len):
+            qm_tmp = RB.RhythmDBQueryModel.new_empty(self.db)
+            query = GLib.PtrArray()
             my_song = songs[i]
             print "Querying for %s" % my_song
-            artist = unicodedata.normalize('NFKD', my_song['artist'].lower()).encode('ascii', 'ignore')
-            title  = unicodedata.normalize('NFKD', my_song['name'].lower()).encode('ascii', 'ignore')
-            self.db.query_append_params(query, RB.RhythmDBQueryType.FUZZY_MATCH, RB.RhythmDBPropType.ARTIST_FOLDED, artist )
-            self.db.query_append_params(query, RB.RhythmDBQueryType.FUZZY_MATCH, RB.RhythmDBPropType.TITLE_FOLDED, title )
-            if i < song_len-1:
-                self.db.query_append_params( query, RB.RhythmDBQueryType.DISJUNCTIVE_MARKER, RB.RhythmDBPropType.TYPE, '' )
-        #print self.db.query_to_string(query)
-        self.db.do_full_query_parsed(self.qm, query)
-
-        # Remove duplicates
-        # TBD
+            artist = unicodedata.normalize('NFKD', 
+                my_song['artist'].lower()).encode('ascii', 'ignore')
+            title  = unicodedata.normalize('NFKD',
+                my_song['name'].lower()).encode('ascii', 'ignore')
+            self.db.query_append_params(query,
+                RB.RhythmDBQueryType.FUZZY_MATCH, 
+                RB.RhythmDBPropType.ARTIST_FOLDED, artist )
+            self.db.query_append_params(query, 
+                RB.RhythmDBQueryType.FUZZY_MATCH, 
+                RB.RhythmDBPropType.TITLE_FOLDED, title )
+            #if i < song_len-1:
+                #self.db.query_append_params( query, 
+                    #RB.RhythmDBQueryType.DISJUNCTIVE_MARKER, 
+                    #RB.RhythmDBPropType.TYPE, '' )
+            # Perform query
+            self.db.do_full_query_parsed(qm_tmp, query)
+            if len(qm_tmp) > 0:
+                # only add the first match
+                #FIXME: implement better duplicate management
+                self.qm.add_entry(qm_tmp[0][0], -1)
 
         # Update view
         self.plfm_source.props.query_model = self.qm
         self.plfm_source.get_entry_view().set_model(self.qm)
-
-        # Reset the filters (browser views, search query) in the library source so we really get all of the entries in there
-#        self.library_source.reset_filters()
 
 
 class PlayLastfmSource(RB.BrowserSource):
