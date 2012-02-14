@@ -103,6 +103,7 @@ class PlayLastFmPlugin(GObject.Object, Peas.Activatable):
                     #RB.RhythmDBQueryType.DISJUNCTIVE_MARKER, 
                     #RB.RhythmDBPropType.TYPE, '' )
             # Perform query
+            #print self.db.query_to_string(query)
             self.db.do_full_query_parsed(qm_tmp, query)
             if len(qm_tmp) > 0:
                 # only add the first match
